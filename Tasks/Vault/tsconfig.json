@@ -6,7 +6,7 @@
     "sourceMap": true,
     "strict": true,
     "outDir": ".bin",
-    // "rootDir": "src",
+    //"rootDir": "src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "typeRoots": [

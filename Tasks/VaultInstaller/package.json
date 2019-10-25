@@ -1,7 +1,7 @@
 {
-  "name": "azure-pipelines-terraform-installer",
+  "name": "azure-pipelines-vault-installer",
   "version": "0.0.1",
-  "description": "A Terraform installer task for Azure Pipelines",
+  "description": "A Vault installer task for Azure Pipelines",
   "main": ".bin/Index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

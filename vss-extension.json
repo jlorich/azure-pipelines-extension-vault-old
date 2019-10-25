@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "terraform-pipelines-extension-dev",
-    "name": "Terraform",
+    "id": "vault-pipelines-extension-dev",
+    "name": "Vault",
     "version": "0.0.1",
     "publisher": "hashicorp",
     "targets": [
@@ -9,37 +9,37 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Task for running Terraform on Azure, AWS, GCP, and Terraform Cloud/Enterprise",
+    "description": "Task for interfacing with HashiCorp Vault in Azure Pipelines",
     "categories": [
         "Azure Pipelines"
     ],
     "files": [
         {
-            "path": "Tasks/TerraformInstaller"
+            "path": "Tasks/VaultInstaller"
         },
         {
-            "path": "Tasks/Terraform"
+            "path": "Tasks/Vault"
         }
     ],
     "contributions": [
         {
-            "id": "9b9f2e72-30c3-432b-a835-dd2b1160f3b5",
+            "id": "f5016087-a6db-40c4-9f5e-c8aeead16b89",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "Tasks/TerraformInstaller"
+                "name": "Tasks/VaultInstaller"
             }
         },
         {
-            "id": "653507a3-d921-47dc-8fed-c5649d8e9e0e",
+            "id": "23bc3f85-3d14-49a2-aec3-07e40fa06676",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "Tasks/Terraform"
+                "name": "Tasks/Vault"
             }
         }
     ]

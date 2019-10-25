@@ -7,39 +7,29 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Terraform",
-            //"stopOnEntry": true,
-            "envFile": "${workspaceFolder}/Tasks/Terraform/.env",
-            "program": "${workspaceFolder}/Tasks/Terraform/src/Index.ts",
-            "preLaunchTask": "Compile TypeScript",
+            "name": "VaultInstaller",
+            "envFile": "${workspaceFolder}/Tasks/VaultInstaller/.env",
+            "program": "${workspaceFolder}/Tasks/VaultInstaller/src/Index.ts",
+            "preLaunchTask": "Compile VaultInstaller",
             "internalConsoleOptions": "openOnSessionStart",
-            // "localRoot": "${workspaceFolder}/Tasks/Terraform/src",
-            // "remoteRoot": "${workspaceFolder}/Tasks/Terraform/.bin",
-            // "runtimeArgs": ["--preserve-symlinks"],
             "sourceMaps": true,
-            //"smartStep": false,
             "outputCapture": "std",
             "outFiles": [
-                "${workspaceFolder}/Tasks/Terraform/.bin/**/*.js"
+                "${workspaceFolder}/Tasks/VaultInstaller/.bin/**/*.js"
             ]
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "TerraformInstaller",
-            //"stopOnEntry": true,
-            "envFile": "${workspaceFolder}/Tasks/TerraformInstaller/.env",
-            "program": "${workspaceFolder}/Tasks/TerraformInstaller/src/Index.ts",
-            "preLaunchTask": "Compile TypeScript",
+            "name": "Vault",
+            "envFile": "${workspaceFolder}/Tasks/Vault/.env",
+            "program": "${workspaceFolder}/Tasks/Vault/src/Index.ts",
+            "preLaunchTask": "Compile Vault",
             "internalConsoleOptions": "openOnSessionStart",
-            // "localRoot": "${workspaceFolder}/Tasks/Terraform/src",
-            // "remoteRoot": "${workspaceFolder}/Tasks/Terraform/.bin",
-            // "runtimeArgs": ["--preserve-symlinks"],
             "sourceMaps": true,
-            //"smartStep": false,
             "outputCapture": "std",
             "outFiles": [
-                "${workspaceFolder}/Tasks/TerraformInstaller/.bin/**/*.js"
+                "${workspaceFolder}/Tasks/Vault/.bin/**/*.js"
             ]
         }
     ]

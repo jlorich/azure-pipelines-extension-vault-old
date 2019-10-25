@@ -1,0 +1,42 @@
+{
+    "id": "23bc3f85-3d14-49a2-aec3-07e40fa06676",
+    "name": "vault",
+    "friendlyName": "Vault",
+    "description": "A task for running HashiCorp Vault",
+    "helpMarkDown": "",
+    "category": "Tool",
+    "author": "HashiCorp",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "instanceNameFormat": "vault",
+    "groups": [
+
+    ],
+    "inputs": [
+        {
+            "name": "command",
+            "type": "picklist",
+            "label": "Command",
+            "defaultValue": "init",
+            "required": true,
+            "helpMarkDown": "Select a method for authenticating vault.",
+            "options": {
+                "token": "token"
+            }
+        }
+    ],
+    "dataSourceBindings": [
+    ],
+    "execution": {
+        "Node": {
+            "target": ".bin/src/Index.js"
+        }
+    }
+}

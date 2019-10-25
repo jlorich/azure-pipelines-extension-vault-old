@@ -1,50 +1,30 @@
 import os = require("os");
 import task = require('azure-pipelines-task-lib/task');
 import fs = require("fs");
+import path = require("path");
 import { injectable } from "inversify";
 import { ToolRunner, IExecOptions, IExecSyncResult } from "azure-pipelines-task-lib/toolrunner";
 import { TaskOptions } from "./TaskOptions";
-import { TerraformProvider } from "./Provider/TerraformProvider";
-import { AzureProvider } from "./Provider/Azure/AzureProvider";
-import { TerraformProviderType } from "./Provider/TerraformProviderType";
-import path = require("path");
+import { VaultAuthenticationProvider } from "./AuthenticationProvider/VaultAuthenticationProvider";
 
 @injectable()
-export class TerraformCommandRunner {
-    private readonly terraform : ToolRunner;
+export class VaultCommandRunner {
+    private readonly vault : ToolRunner;
 
     public constructor(
-        private provider : AzureProvider,
+        private authenticationProvider : VaultAuthenticationProvider,
         private options: TaskOptions
         
     ) {
-        this.terraform = this.createTerraformToolRunner();
-    }
-
-    /**
-     * Initializes Terraform with the backend configuration specified from the provider
-     */
-    public async init(args: Array<string> = [], authenticate: boolean = true) {
-        let backendConfigOptions = await this.provider.getBackendConfigOptions();
-
-        // Set the backend configuration values
-        //
-        // Values are not quoted intentionally - the way node spawns processes it will 
-        // see quotes as part of the values
-        for (let key in backendConfigOptions) {
-            let value = backendConfigOptions[key];
-            args.push(`-backend-config=${key}=${value}`);
-        }
-
-        await this.exec(["init", ...args], false);
+        this.vault = this.createVaultToolRunner();
     }
 
    /**
-     * Executes a script within an authenticated Terraform environment
+     * Executes a script within an authenticated Vault environment
      * @param script The location of the script to run
      */
     public async exec(args: Array<string> = [], authenticate: boolean = true) {
-        console.log("Executing terraform command");
+        console.log("Executing vault command");
 
         if (!this.options.command) {
             throw new Error("No command specified");
@@ -54,10 +34,10 @@ export class TerraformCommandRunner {
         let authenticationEnv : { [key: string]: string; } = {};
 
         if (authenticate) {
-           authenticationEnv = await this.provider.authenticate();
+           authenticationEnv = await this.authenticationProvider.authenticate();
         }
 
-        let command = this.terraform;
+        let command = this.vault;
 
         for (let arg of args) {
             command.arg(arg);
@@ -77,17 +57,17 @@ export class TerraformCommandRunner {
         } as unknown as IExecOptions);
 
         if (result > 0) {
-            throw new Error("Terraform initalize failed");
+            throw new Error("Vault initalize failed");
         }
     }
 
     /**
-     * Executes a script within an authenticated Terraform environment
+     * Executes a script within an authenticated Vault environment
      * @param script The location of the script to run
      */
     public async cli(script: string) {
         // Handle authentication for this command
-        let authenticationEnv = await this.provider.authenticate();
+        let authenticationEnv = await this.authenticationProvider.authenticate();
 
         let content = fs.readFileSync(script,'utf8');
 
@@ -105,18 +85,18 @@ export class TerraformCommandRunner {
         } as unknown as IExecOptions);
 
         if (result > 0) {
-            throw new Error("Terraform CLI failed");
+            throw new Error("Vault CLI failed");
         }
     }
 
     /**
-     * Creates an Azure Pipelines ToolRunner for Terraform
+     * Creates an Azure Pipelines ToolRunner for Vault
      */
-    private createTerraformToolRunner() : ToolRunner {
-        let terraformPath = task.which("terraform", true);
-        let terraform: ToolRunner = task.tool(terraformPath);
+    private createVaultToolRunner() : ToolRunner {
+        let vaultPath = task.which("vault", true);
+        let vault: ToolRunner = task.tool(vaultPath);
 
-        return terraform;
+        return vault;
     }
 
     /**

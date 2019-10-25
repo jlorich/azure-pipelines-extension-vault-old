@@ -3,14 +3,14 @@ import fs = require("fs");
 import os = require("os");
 
 import { injectable } from "inversify";
-import { TerraformCommandRunner } from "./TerraformCommandRunner";
+import { VaultCommandRunner } from "./VaultCommandRunner";
 import { TaskOptions } from './TaskOptions';
 
 @injectable()
-export class TerraformTask {
+export class VaultTask {
 
     constructor(
-        private terraform : TerraformCommandRunner,
+        private vault : VaultCommandRunner,
         private options: TaskOptions)
     {
         
@@ -18,28 +18,8 @@ export class TerraformTask {
 
     public async run() {
         switch(this.options.command) {
-            case "init":
-                await this.terraform.init(["-input=false"]);
-                break;
-            case "validate":
-                await this.terraform.exec(["validate"], false);
-                break;
-            case "plan":
-                await this.terraform.exec(["plan", "-input=false"]);
-                break;
-            case "apply":
-                await this.terraform.exec(["apply", "-input=false", "-auto-approve"]);
-                break;
-            case "destroy":
-                await this.terraform.exec(["destroy", "-auto-approve=true"]);
-                break;
-            case "CLI":
-                if(this.options.initialize) {
-                    await this.terraform.init(["-input=false"]);
-                }
-
-                var path = this.initScriptAtPath();
-                await this.terraform.cli(path);
+            case "login":
+                await this.vault.exec(["login"]);
                 break;
             default:
                 throw new Error("Invalid command");
@@ -67,10 +47,10 @@ export class TerraformTask {
             var tmpDir = this.options.tempDir || os.tmpdir();
 
             if (os.type() != "Windows_NT") {
-                scriptPath = path.join(tmpDir, "terraformclitaskscript" + new Date().getTime() + ".sh");
+                scriptPath = path.join(tmpDir, "vaultclitaskscript" + new Date().getTime() + ".sh");
             }
             else {
-                scriptPath = path.join(tmpDir, "terraformclitaskscript" + new Date().getTime() + ".bat");
+                scriptPath = path.join(tmpDir, "vaultclitaskscript" + new Date().getTime() + ".bat");
             }
             
             this.createFile(scriptPath, this.options.script);

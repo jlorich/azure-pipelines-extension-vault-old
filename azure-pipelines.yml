@@ -20,8 +20,8 @@ stages:
     parameters:
       publisher: jlorich
       tasks:
-        - TerraformInstaller
-        - Terraform
+        - VaultInstaller
+        - Vault
 
 # Staging Extension release
 - stage: Release

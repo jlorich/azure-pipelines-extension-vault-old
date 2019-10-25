@@ -5,46 +5,46 @@ import os = require('os');
 import fs = require('fs');
 
 const uuidV4 = require('uuid/v4');
-const terraformToolName = "terraform";
+const vaultToolName = "vault";
 const isWindows = os.type().match(/^Win/);
 
-export async function downloadTerraform(inputVersion: string): Promise<string> {
+export async function downloadVault(inputVersion: string): Promise<string> {
     let version = tools.cleanVersion(inputVersion);
     if (!version) {
         throw new Error(tasks.loc("InputVersionNotValidSemanticVersion", inputVersion));
     }
 
-    let cachedToolPath = tools.findLocalTool(terraformToolName, version);
+    let cachedToolPath = tools.findLocalTool(vaultToolName, version);
     if (!cachedToolPath) {
-        let terraformDownloadUrl = getTerraformDownloadUrl(version);
-        let fileName = `${terraformToolName}-${version}-${uuidV4()}.zip`;
-        let terraformDownloadPath;
+        let vaultDownloadUrl = getvaultDownloadUrl(version);
+        let fileName = `${vaultToolName}-${version}-${uuidV4()}.zip`;
+        let vaultDownloadPath;
 
         try {
-            terraformDownloadPath = await tools.downloadTool(terraformDownloadUrl, fileName);
+            vaultDownloadPath = await tools.downloadTool(vaultDownloadUrl, fileName);
         } catch (exception) {
-            throw new Error(tasks.loc("TerraformDownloadFailed", terraformDownloadUrl, exception));
+            throw new Error(tasks.loc("vaultDownloadFailed", vaultDownloadUrl, exception));
         }
 
-        let terraformUnzippedPath = await tools.extractZip(terraformDownloadPath);
-        cachedToolPath = await tools.cacheDir(terraformUnzippedPath, terraformToolName, version);
+        let vaultUnzippedPath = await tools.extractZip(vaultDownloadPath);
+        cachedToolPath = await tools.cacheDir(vaultUnzippedPath, vaultToolName, version);
     }
 
-    let terraformPath = findTerraformExecutable(cachedToolPath);
-    if (!terraformPath) {
-        throw new Error(tasks.loc("TerraformNotFoundInFolder", cachedToolPath));
+    let vaultPath = findvaultExecutable(cachedToolPath);
+    if (!vaultPath) {
+        throw new Error(tasks.loc("vaultNotFoundInFolder", cachedToolPath));
     }
 
     if (!isWindows) {
-        fs.chmodSync(terraformPath, "777");
+        fs.chmodSync(vaultPath, "777");
     }
 
-    tasks.setVariable('terraformLocation', terraformPath);
+    tasks.setVariable('vaultLocation', vaultPath);
 
-    return terraformPath;
+    return vaultPath;
 }
 
-function getTerraformDownloadUrl(version: string): string {
+function getvaultDownloadUrl(version: string): string {
     let platform: string;
     let architecture: string;
 
@@ -78,13 +78,13 @@ function getTerraformDownloadUrl(version: string): string {
             throw new Error(tasks.loc("ArchitectureNotSupported", os.arch()));
     }
 
-    return `https://releases.hashicorp.com/terraform/${version}/terraform_${version}_${platform}_${architecture}.zip`;
+    return `https://releases.hashicorp.com/vault/${version}/vault_${version}_${platform}_${architecture}.zip`;
 }
 
-function findTerraformExecutable(rootFolder: string): string {
-    let terraformPath = path.join(rootFolder, terraformToolName + getExecutableExtension());
+function findvaultExecutable(rootFolder: string): string {
+    let vaultPath = path.join(rootFolder, vaultToolName + getExecutableExtension());
     var allPaths = tasks.find(rootFolder);
-    var matchingResultFiles = tasks.match(allPaths, terraformPath, rootFolder);
+    var matchingResultFiles = tasks.match(allPaths, vaultPath, rootFolder);
     return matchingResultFiles[0];
 }
 
