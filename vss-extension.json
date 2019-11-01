@@ -66,6 +66,7 @@
                 "authenticationSchemes": [
                     {
                         "id": "endpoint-auth-scheme-token",
+                        "name": "Token Authentication",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
                         "inputDescriptors": [
@@ -85,6 +86,7 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-userpass",
+                        "name": "Userpass Authentication",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
                         "description": "i18n:Vault userpass endpoint authentication scheme",
                         "inputDescriptors": [
@@ -117,7 +119,35 @@
                     "displayName": "i18n:Vault URL",
                     "required": true,
                     "helpText": "i18n:Client connection endpoint for the Vault instance. Prefix the value with &quot;https://&quot;."
-                }
+                },
+                "inputDescriptors": [
+                    {
+                        "id": "vaultSkipVerify",
+                        "name": "i18n:Skip SSL Verification",
+                        "description": "i18n:Skips Certificate Verification",
+                        "inputMode": "combo",
+                        "isConfidential": false,
+                        "validation": {
+                            "isRequired": false,
+                            "dataType": "string",
+                            "maxLength": 300
+                        },
+                        "values": {
+                            "inputId": "vaultSkipVerifyValues",
+                            "defaultValue": "false",
+                            "possibleValues": [
+                                {
+                                    "value": "false",
+                                    "displayValue": "False"
+                                },
+                                {
+                                    "value": "true",
+                                    "displayValue": "True"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         }
     ]
