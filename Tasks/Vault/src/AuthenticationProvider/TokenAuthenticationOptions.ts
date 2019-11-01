@@ -20,6 +20,6 @@ export class TokenAuthenticationOptions {
     @endpointAuthorizationParameter("vaultConnectedServiceName", "password")
     public password : string = ""; 
 
-    @endpointDataParameter("vaultConnectedServiceName", "vaultSkipVerify")
-    public skipVerify : string = ""; 
+    @endpointDataParameter("vaultConnectedServiceName", "vaultTLSVerify")
+    public tlsVerify : string = ""; 
 }

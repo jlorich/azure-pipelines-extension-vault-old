@@ -72,7 +72,7 @@ export function endpointDataParameter(id : string, key : string, required : bool
  */
 export function endpointUrl(id : string, required : boolean = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
-        Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointDataParameter, id, "", required), target, propertyKey)
+        Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointUrl, id, "", required), target, propertyKey)
     }
 }
 
@@ -105,7 +105,7 @@ export class Options {
 
             let type = metadata && metadata.type || TaskInputType.Default;
             let value : any;
-            let scheme : any;
+            let endpoint : any;
 
             switch (type) {
                 case TaskInputType.Default:
@@ -115,18 +115,20 @@ export class Options {
                     value = task.getTaskVariable(metadata.id);
                     break;
                 case TaskInputType.EndpointAuthorizationScheme:
-                    value = task.getEndpointAuthorizationScheme(metadata.id, metadata.required);
+                    endpoint = task.getInput(metadata.id, metadata.required);
+                    value = task.getEndpointAuthorizationScheme(endpoint, metadata.required);
                     break;
                 case TaskInputType.EndpointAuthorizationParameter:
-                    scheme = task.getEndpointAuthorizationScheme(metadata.id, metadata.required);
-                    value = task.getEndpointAuthorizationParameter(scheme, metadata.key, metadata.required);
+                    endpoint = task.getInput(metadata.id, metadata.required);
+                    value = task.getEndpointAuthorizationParameter(endpoint, metadata.key, metadata.required);
                     break;
                 case TaskInputType.EndpointDataParameter:
-                    scheme = task.getEndpointAuthorizationScheme(metadata.id, metadata.required);
-                    value = task.getEndpointDataParameter(scheme, metadata.key, metadata.required);
+                    endpoint = task.getInput(metadata.id, metadata.required);
+                    value = task.getEndpointDataParameter(endpoint, metadata.key, metadata.required);
                     break;
                 case TaskInputType.EndpointUrl:
-                    value = task.getEndpointUrl(metadata.id, metadata.required);
+                    endpoint = task.getInput(metadata.id, metadata.required);
+                    value = task.getEndpointUrl(endpoint, metadata.required);
                     break;
             }
 

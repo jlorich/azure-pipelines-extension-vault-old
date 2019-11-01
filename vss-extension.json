@@ -122,9 +122,9 @@
                 },
                 "inputDescriptors": [
                     {
-                        "id": "vaultSkipVerify",
+                        "id": "vaultTLSVerify",
                         "name": "i18n:Require TLS Verification",
-                        "description": "i18n:Requires TLS certificate verification (default) when talking to the given endpoint",
+                        "description": "i18n:Enables TLS certificate verification when talking to the given endpoint",
                         "inputMode": "combo",
                         "isConfidential": false,
                         "validation": {
@@ -133,16 +133,16 @@
                             "maxLength": 300
                         },
                         "values": {
-                            "inputId": "vaultSkipVerifyValues",
+                            "inputId": "vaultTLSVerifyValues",
                             "defaultValue": "true",
                             "possibleValues": [
                                 {
-                                    "value": "false",
-                                    "displayValue": "False"
-                                },
-                                {
                                     "value": "true",
                                     "displayValue": "True"
+                                },
+                                {
+                                    "value": "false",
+                                    "displayValue": "False"
                                 }
                             ]
                         }

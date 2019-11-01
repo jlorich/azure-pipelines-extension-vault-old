@@ -8,11 +8,11 @@ import { endpointAuthorizationScheme, taskVariable } from "./Options"
 export class TaskOptions {
 
     // Basic
-    readonly command : string | undefined;
-    readonly cwd : string | undefined;
-    readonly scriptLocation : string | undefined;
-    readonly scriptPath : string | undefined;
-    readonly script : string | undefined;
+    readonly command : string = "";
+    readonly cwd : string = "";
+    readonly scriptLocation : string = "";
+    readonly scriptPath : string = "";
+    readonly script : string = "";
 
     @endpointAuthorizationScheme("vaultConnectedServiceName")
     public authMethod : string = "";

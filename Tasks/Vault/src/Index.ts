@@ -19,8 +19,10 @@ let container = new Container();
 
 // Bind Vault task classes for DI
 container.bind(VaultTask).toSelf()
-container.bind(TaskOptions).toSelf()
 container.bind(VaultCommandRunner).toSelf();
+container.bind<TaskOptions>(TaskOptions).toDynamicValue((context) => {
+    return Options.load(TaskOptions); 
+});
 
 let options = container.get(TaskOptions);
 
@@ -50,6 +52,6 @@ var vaultTask = container.get<VaultTask>(VaultTask);
 vaultTask.run().then(function() 
 {
     task.setResult(TaskResult.Succeeded, "Vault successfully ran");
-}, function() {
+}, function(reason) {
     task.setResult(TaskResult.Failed, "Vault failed to run");
 });

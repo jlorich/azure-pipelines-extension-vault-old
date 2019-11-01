@@ -18,8 +18,8 @@ export class VaultTask {
 
     public async run() {
         switch(this.options.command) {
-            case "login":
-                await this.vault.exec(["login"]);
+            case 'login':
+                await this.vault.exec(['login']);
                 break;
             default:
                 throw new Error("Invalid command");

@@ -17,6 +17,8 @@ export class TokenAuthenticationProvider extends VaultAuthenticationProvider {
      */
     public async authenticate() : Promise<{ [key: string]: string; }> {
         return {
+            VAULT_SKIP_VERIFY: String(this.options.tlsVerify == "false"),
+            VAULT_ADDR: this.options.url,
             VAULT_TOKEN: this.options.token
         };
     }
