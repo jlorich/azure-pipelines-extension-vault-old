@@ -54,6 +54,7 @@ steps:
       --include=.bin/*** \
       --include=node_modules/*** \
       --include=package.json \
+      --include=icon.png \
       --include=package-lock.json \
       --include=task.json \
       --exclude=* \

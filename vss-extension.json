@@ -70,8 +70,8 @@
                         "inputDescriptors": [
                             {
                                 "id": "apitoken",
-                                "name": "i18n:API Token",
-                                "description": "i18n:API Token for connection to endpoint",
+                                "name": "i18n:Vault Token",
+                                "description": "i18n:Token to use when accessing vault",
                                 "inputMode": "textbox",
                                 "isConfidential": true,
                                 "validation": {
@@ -83,19 +83,11 @@
                         ]
                     }
                 ],
-                "inputDescriptors": [
-                    {
-                        "id": "vaultUrl",
-                        "name": "Vault URL",
-                        "description": "The URL to the target Vault instance.",
-                        "inputMode": "textbox",
-                        "isConfidential": false,
-                        "validation": {
-                            "isRequired": true,
-                            "dataType": "string"
-                        }
-                    }
-                ]
+                "url": {
+                    "displayName": "i18n:Vault URL",
+                    "required": true,
+                    "helpText": "i18n:Client connection endpoint for the Vault instance. Prefix the value with &quot;https://&quot;."
+                }
             }
         }
     ]
