@@ -123,8 +123,8 @@
                 "inputDescriptors": [
                     {
                         "id": "vaultSkipVerify",
-                        "name": "i18n:Skip SSL Verification",
-                        "description": "i18n:Skips Certificate Verification",
+                        "name": "i18n:Disable TSL Verification",
+                        "description": "i18n:Disables TLS certificate verification when talking to the given endpoint",
                         "inputMode": "combo",
                         "isConfidential": false,
                         "validation": {
