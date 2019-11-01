@@ -21,6 +21,18 @@
     ],
     "inputs": [
         {
+            "name": "loginMethod",
+            "type": "picklist",
+            "label": "Login Method",
+            "defaultValue": "token",
+            "required": true,
+            "helpMarkDown": "Select a method for authenticating vault.",
+            "options": {
+                "token": "Token",
+                "userPass": "Username"
+            }
+        },
+        {
             "name": "command",
             "type": "picklist",
             "label": "Command",
@@ -28,7 +40,11 @@
             "required": true,
             "helpMarkDown": "Select a method for authenticating vault.",
             "options": {
-                "token": "token"
+                "kvGet": "kv get",
+                "kvPut": "kv put",
+                "read": "read",
+                "write": "write",
+                "cli": "cli"
             }
         }
     ],

@@ -43,9 +43,9 @@ export class VaultCommandRunner {
             command.arg(arg);
         }
 
-        if (this.options.args) {
-            command.line(this.options.args);
-        }
+        // if (this.options.args) {
+        //     command.line(this.options.args);
+        // }
 
         let result = await command.exec({
             cwd: path.join(process.cwd(), this.options.cwd || ""),

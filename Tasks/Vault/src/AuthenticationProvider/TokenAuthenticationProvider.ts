@@ -17,9 +17,9 @@ export class TokenAuthenticationProvider extends VaultAuthenticationProvider {
      * Loads the ARM connected service information into the environment
      */
     public async authenticate() : Promise<{ [key: string]: string; }> {
-        if (!this.options.providerAzureConnectedServiceName) {
-            throw new Error("No Azure connection specified")
-        }
+        // if (!this.options.providerAzureConnectedServiceName) {
+        //     throw new Error("No Azure connection specified")
+        // }
 
         return {
             VAULT_TOKEN: ""

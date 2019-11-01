@@ -9,5 +9,9 @@ export class TaskOptions {
 
     // Basic
     readonly command : string | undefined;
-    readonly vaultToken : string | undefined;
+    readonly cwd : string | undefined;
+    readonly scriptLocation : string | undefined;
+    readonly scriptPath : string | undefined;
+    readonly script : string | undefined;
+    readonly tempDir : string | undefined;
 }

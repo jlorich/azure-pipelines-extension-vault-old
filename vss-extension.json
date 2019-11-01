@@ -3,7 +3,7 @@
     "id": "vault-pipelines-extension-dev",
     "name": "Vault",
     "version": "0.0.1",
-    "publisher": "hashicorp",
+    "publisher": "jlorich",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -13,6 +13,17 @@
     "categories": [
         "Azure Pipelines"
     ],
+    "Tags": [ 
+        "Vault",
+        "HashiCorp",
+        "Secrets",
+        "Release", 
+        "DevOps"
+    ],
+    "icons": {
+        "default": "images/icon.png",
+        "large": "images/icon.png"
+    },
     "files": [
         {
             "path": "Tasks/VaultInstaller"
@@ -40,6 +51,97 @@
             ],
             "properties": {
                 "name": "Tasks/Vault"
+            }
+        },
+        {
+            "id": "vault-enpoint-type",
+            "description": "Credentials for task invoking HashiCorp Vault",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "vault",
+                "displayName": "Vault",
+                "authenticationSchemes": [
+                    {
+                        "id": "endpoint-auth-scheme-token",
+                        "description": "i18n:Token based Vault authentication scheme",
+                        "type": "ms.vss-endpoint.service-endpoint-auth-scheme",
+                        "targets": [
+                            "ms.vss-endpoint.endpoint-auth-schemes"
+                        ],
+                        "properties": {
+                            "name": "token",
+                            "displayName": "i18n:Token Based Vault Authentication",
+                            "inputDescriptors": [
+                                {
+                                    "id": "apitoken",
+                                    "name": "i18n:Vault Token",
+                                    "description": "i18n:Token used for connection to vault",
+                                    "inputMode": "textbox",
+                                    "isConfidential": true,
+                                    "validation": {
+                                        "isRequired": true,
+                                        "dataType": "string",
+                                        "maxLength": 300
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "endpoint-auth-scheme-userpass",
+                        "description": "Username and password based Vault authentication scheme",
+                        "type": "ms.vss-endpoint.service-endpoint-auth-scheme",
+                        "targets": [
+                            "ms.vss-endpoint.endpoint-auth-schemes"
+                        ],
+                        "properties": {
+                            "name": "UsernamePassword",
+                            "displayName": "i18n:Username and password Vault authentication",
+                            "inputDescriptors": [
+                                {
+                                    "id": "username",
+                                    "name": "i18n:Username",
+                                    "description": "i18n:Username for connecting to Vault",
+                                    "inputMode": "textbox",
+                                    "isConfidential": false,
+                                    "validation": {
+                                        "isRequired": true,
+                                        "dataType": "string",
+                                         "maxLength": 300
+                                    }
+                                },
+                                {   
+                                    "id": "password",
+                                    "name": "i18n:Password",
+                                    "description": "i18n:Password for connecting to Vault",
+                                    "inputMode": "passwordbox",
+                                    "isConfidential": true,
+                                    "validation": {
+                                        "isRequired": true,
+                                        "dataType": "string",
+                                        "maxLength": 300
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "inputDescriptors": [
+                    {
+                        "id": "vaultUrl",
+                        "name": "Vault URL",
+                        "description": "The URL to the target Vault instance.",
+                        "inputMode": "textbox",
+                        "isConfidential": false,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    }
+                ]
             }
         }
     ]
