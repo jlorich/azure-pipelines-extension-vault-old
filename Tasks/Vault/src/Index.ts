@@ -10,20 +10,21 @@ import { Options } from './Options'
 import { TaskOptions } from './TaskOptions';
 import { VaultAuthenticationProvider } from './AuthenticationProvider/VaultAuthenticationProvider'
 import { TokenAuthenticationProvider } from './AuthenticationProvider/TokenAuthenticationProvider'
+import { TokenAuthenticationOptions } from './AuthenticationProvider/TokenAuthenticationOptions'
 import { UserpassAuthenticationProvider } from './AuthenticationProvider/UserpassAuthenticationProvider'
 import { UserpassAuthenticationOptions } from './AuthenticationProvider/UserpassAuthenticationOptions'
-import { TokenAuthenticationOptions } from './AuthenticationProvider/TokenAuthenticationOptions'
+
 
 let container = new Container();
 
+// Bind Vault task classes for DI
 container.bind(VaultTask).toSelf()
 container.bind(TaskOptions).toSelf()
 container.bind(VaultCommandRunner).toSelf();
-container.bind(VaultAuthenticationProvider).to(TokenAuthenticationProvider)
 
-// Bind Terraform Provider
 let options = container.get(TaskOptions);
 
+// Bind appropriate auth and auth options providers
 switch (options.authMethod) {
     case "endpoint-auth-scheme-token":
         container.bind(VaultAuthenticationProvider).to(TokenAuthenticationProvider);
@@ -43,9 +44,7 @@ switch (options.authMethod) {
         break;
 }
 
-
-
-
+// Get and run the Vault task
 var vaultTask = container.get<VaultTask>(VaultTask);
 
 vaultTask.run().then(function() 

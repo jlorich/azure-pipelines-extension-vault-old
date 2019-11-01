@@ -13,6 +13,9 @@ enum TaskInputType {
     EndpointUrl
 }
 
+/**
+ * Metadata to identify properties with the type of data that should be loaded
+ */
 class OptionMetadata {
     constructor (
         public type: TaskInputType = TaskInputType.Default,
@@ -23,40 +26,58 @@ class OptionMetadata {
     }
 }
 
+/**
+ * Marks this property for to be set with the given TaskVariable when the class
+ * is insantiated with Options.load
+ */
 export function taskVariable(id : string, required : boolean = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
         Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.TaskVariable, id, "", required), target, propertyKey)
     }
 }
 
+/**
+ * Marks this property for to be set with the given endpointAuthroizationScheme value for
+ * a service connection when the class is insantiated with Options.load
+ */
 export function endpointAuthorizationScheme(id : string, required = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
         Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointAuthorizationScheme, id, "", required), target, propertyKey)
     }
 }
 
+/**
+ * Marks this property for to be set with the given endpointAuthorizationParameter value for 
+ * a service connection when the class is insantiated with Options.load
+ */
 export function endpointAuthorizationParameter(id : string, key : string, required : boolean = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
         Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointAuthorizationParameter, id, key, required), target, propertyKey)
     }
 }
 
+/**
+ * Marks this property for to be set with the given endpointDataParameter value for 
+ * a service connection when the class is insantiated with Options.load
+ */
 export function endpointDataParameter(id : string, key : string, required : boolean = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
         Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointDataParameter, id, key, required), target, propertyKey)
     }
 }
 
+/**
+ * Marks this property for to be set with the given EndpointUrl value for 
+ * a service connection when the class is insantiated with Options.load
+ */
 export function endpointUrl(id : string, required : boolean = true) :any {
     return function(target : any, propertyKey: string, descriptor: PropertyDescriptor) {
         Reflect.defineMetadata(valueMetadataKey, new OptionMetadata(TaskInputType.EndpointDataParameter, id, "", required), target, propertyKey)
     }
 }
 
-
-
 /**
- * Strong-type accessor for Task configuration
+ * Strongly-typed options class builder for Azure Pipeline Tasks
  */
 @injectable()
 export class Options {
@@ -135,8 +156,8 @@ export class Options {
     }
 }
 
-
 // Extend inversify to support configuration options binding
+// Leaving this commented out as it doesn't work and isn't a priority - but would be nice for config
 // declare module "inversify" {
 //     interface Container {
 //         configure<T>(func: (token: any) => T) : interfaces.BindingInWhenOnSyntax<T>;
