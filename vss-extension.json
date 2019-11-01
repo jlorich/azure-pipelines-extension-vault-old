@@ -61,10 +61,11 @@
                 "ms.vss-endpoint.endpoint-types"
             ],
             "properties": {
-                "name": "vault",
+                "name": "vaultServiceEndpoint",
                 "displayName": "Vault",
                 "authenticationSchemes": [
                     {
+                        "id": "endpoint-auth-scheme-token",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
                         "inputDescriptors": [
@@ -78,6 +79,35 @@
                                     "isRequired": true,
                                     "dataType": "string",
                                     "maxLength": 300
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "endpoint-auth-scheme-userpass",
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
+                        "description": "i18n:Vault userpass endpoint authentication scheme",
+                        "inputDescriptors": [
+                            {
+                                "id": "username",
+                                "name": "i18n:Username",
+                                "description": "i18n:Vault username",
+                                "inputMode": "textbox",
+                                "isConfidential": false,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
+                                }
+                            },
+                            {
+                                "id": "password",
+                                "name": "i18n:Password",
+                                "description": "i18n:Vault Password",
+                                "inputMode": "textarea",
+                                "isConfidential": false,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
                                 }
                             }
                         ]
