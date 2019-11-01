@@ -1,5 +1,10 @@
 import { injectable } from "inversify";
-import { endpointAuthorizationScheme, endpointAuthorizationParameter, endpointUrl } from "../Options";
+import { 
+    endpointAuthorizationScheme,
+    endpointDataParameter,
+    endpointAuthorizationParameter,
+    endpointUrl
+} from "../Options";
 
 @injectable()
 export class TokenAuthenticationOptions {
@@ -14,4 +19,7 @@ export class TokenAuthenticationOptions {
 
     @endpointAuthorizationParameter("vaultConnectedServiceName", "password")
     public password : string = ""; 
+
+    @endpointDataParameter("vaultConnectedServiceName", "vaultSkipVerify")
+    public skipVerify : string = ""; 
 }

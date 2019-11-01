@@ -66,7 +66,7 @@
                 "authenticationSchemes": [
                     {
                         "id": "endpoint-auth-scheme-token",
-                        "name": "Token Authentication",
+                        "displayName": "i18n:Token Authentication",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
                         "inputDescriptors": [
@@ -86,7 +86,7 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-userpass",
-                        "name": "Userpass Authentication",
+                        "displayName": "i18n:Userpass Authentication",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
                         "description": "i18n:Vault userpass endpoint authentication scheme",
                         "inputDescriptors": [
@@ -106,7 +106,7 @@
                                 "name": "i18n:Password",
                                 "description": "i18n:Vault Password",
                                 "inputMode": "textarea",
-                                "isConfidential": false,
+                                "isConfidential": true,
                                 "validation": {
                                     "isRequired": true,
                                     "dataType": "string"
