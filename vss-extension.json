@@ -65,36 +65,22 @@
                 "displayName": "Vault",
                 "authenticationSchemes": [
                     {
-                        "id": "endpoint-auth-scheme-token",
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
-                        "type": "ms.vss-endpoint.service-endpoint-auth-scheme",
-                        "targets": [
-                            "ms.vss-endpoint.endpoint-auth-schemes"
-                        ],
-                        "properties": {
-                            "name": "Token",
-                            "displayName": "i18n:Token Based Authentication",
-                            "headers": [
-                                {
-                                    "name": "Authorization",
-                                    "value": "{{endpoint.apitoken}}"
+                        "inputDescriptors": [
+                            {
+                                "id": "apitoken",
+                                "name": "i18n:API Token",
+                                "description": "i18n:API Token for connection to endpoint",
+                                "inputMode": "textbox",
+                                "isConfidential": true,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string",
+                                    "maxLength": 300
                                 }
-                            ],
-                            "inputDescriptors": [
-                                {
-                                    "id": "apitoken",
-                                    "name": "i18n:API Token",
-                                    "description": "i18n:API Token for connection to endpoint",
-                                    "inputMode": "textbox",
-                                    "isConfidential": true,
-                                    "validation": {
-                                        "isRequired": true,
-                                        "dataType": "string",
-                                        "maxLength": 300
-                                    }
-                                }
-                            ]
-                        }
+                            }
+                        ]
                     }
                 ],
                 "inputDescriptors": [
