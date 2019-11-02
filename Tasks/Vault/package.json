@@ -2,7 +2,7 @@
   "name": "azure-pipelines-vault-task",
   "version": "0.0.1",
   "description": "A Vault task for Azure Pipelines",
-  "main": ".bin/src/Index.js",
+  "main": ".bin/Index.js",
   "author": "",
   "license": "MPL-2.0",
   "scripts": {
