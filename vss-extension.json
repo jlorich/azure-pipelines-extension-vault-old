@@ -66,6 +66,7 @@
                 "authenticationSchemes": [
                     {
                         "id": "endpoint-auth-scheme-token",
+                        "name": "token",
                         "displayName": "i18n:Vault Token",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
@@ -86,6 +87,7 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-userpass",
+                        "name": "Userpass",
                         "displayName": "i18n:Username/Password",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
                         "description": "i18n:Vault username endpoint authentication scheme",
@@ -116,6 +118,7 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-github",
+                        "name": "github",
                         "displayName": "i18n:GitHub",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:GitHub Personal Access Token based endpoint authentication scheme",
