@@ -29,14 +29,14 @@ let options = container.get(TaskOptions);
 
 // Bind appropriate auth and auth options providers
 switch (options.authMethod) {
-    case "endpoint-auth-scheme-token":
+    case "Token":
         container.bind(VaultAuthenticationProvider).to(TokenAuthenticationProvider);
         container.bind<TokenAuthenticationOptions>(TokenAuthenticationOptions).toDynamicValue((context) => {
             return Options.load(TokenAuthenticationOptions); 
         });
 
         break;
-    case "endpoint-auth-scheme-userpass":
+    case "UsernamePassword":
         container.bind(VaultAuthenticationProvider).to(UserpassAuthenticationProvider);
         container.bind<UserpassAuthenticationOptions>(UserpassAuthenticationOptions).toDynamicValue((context) => {
             return Options.load(UserpassAuthenticationOptions); 
