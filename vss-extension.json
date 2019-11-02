@@ -54,6 +54,30 @@
             }
         },
         {
+            "id": "endpoint-auth-scheme-github",
+            "type": "ms.vss-endpoint.service-endpoint-auth-scheme",
+            "description": "GitHub authentication scheme for Vault. ",
+            "targets": ["ms.vss-endpoint.endpoint-auth-schemes"],
+            "properties": {
+                "name": "github",
+                "displayName": "i18n:GitHub",
+                "inputDescriptors": [
+                    {
+                        "id": "personalAccessToken",
+                        "name": "i18n:Personal Access Token",
+                        "description": "i18n:Personal Access Token to use when authenticating with GitHub",
+                        "inputMode": "textbox",
+                        "isConfidential": true,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string",
+                            "maxLength": 300
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "id": "vault-enpoint-type",
             "description": "Credentials for task invoking HashiCorp Vault",
             "type": "ms.vss-endpoint.service-endpoint-type",
@@ -117,25 +141,7 @@
                         ]
                     },
                     {
-                        "id": "endpoint-auth-scheme-github",
-                        "name": "github",
-                        "displayName": "i18n:GitHub",
-                        "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
-                        "description": "i18n:GitHub Personal Access Token based endpoint authentication scheme",
-                        "inputDescriptors": [
-                            {
-                                "id": "apitoken",
-                                "name": "i18n:Personal Access Token",
-                                "description": "i18n:Personal Access Token to use when authenticating with GitHub",
-                                "inputMode": "textbox",
-                                "isConfidential": true,
-                                "validation": {
-                                    "isRequired": true,
-                                    "dataType": "string",
-                                    "maxLength": 300
-                                }
-                            }
-                        ]
+                        "type": "endpoint-auth-scheme-github"
                     }
                 ],
                 "url": {

@@ -8,6 +8,6 @@ import {
  */
 @injectable()
 export class GitHubAuthenticationOptions {
-    @endpointAuthorizationParameter("vaultConnectedServiceName", "apitoken")
+    @endpointAuthorizationParameter("vaultConnectedServiceName", "personalAccessToken")
     public personalAccessToken : string = ""; 
 }
