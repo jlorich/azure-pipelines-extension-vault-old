@@ -16,7 +16,7 @@ async function configurevault() {
 }
 
 async function verifyVault() {
-    console.log(tasks.loc("VerifyvaultInstallation"));
+    console.log(tasks.loc("VerifyVaultInstallation"));
     let vaultPath = tasks.which("vault", true);
     let vaultTool : ToolRunner = tasks.tool(vaultPath);
     vaultTool.arg("version");

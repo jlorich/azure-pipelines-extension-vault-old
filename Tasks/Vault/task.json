@@ -82,7 +82,7 @@
     ],
     "execution": {
         "Node": {
-            "target": ".bin/src/Index.js"
+            "target": ".bin/Index.js"
         }
     }
 }
