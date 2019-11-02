@@ -1,7 +1,7 @@
 jobs:
 # Validates a valid template
 - job: TestUserpassKVGet
-  displayName: Test Keyvalue Get
+  displayName: Test Userpass Keyvalue Get 
   dependsOn:
   pool:
     vmImage: 'Ubuntu-16.04'
