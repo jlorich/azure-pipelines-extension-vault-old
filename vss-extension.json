@@ -119,35 +119,7 @@
                     "displayName": "i18n:Vault URL",
                     "required": true,
                     "helpText": "i18n:Client connection endpoint for the Vault instance. Prefix the value with &quot;https://&quot;."
-                },
-                "inputDescriptors": [
-                    {
-                        "id": "vaultTLSVerify",
-                        "name": "i18n:Require TLS Verification",
-                        "description": "i18n:Enables TLS certificate verification when talking to the given endpoint",
-                        "inputMode": "combo",
-                        "isConfidential": false,
-                        "validation": {
-                            "isRequired": true,
-                            "dataType": "string",
-                            "maxLength": 300
-                        },
-                        "values": {
-                            "inputId": "vaultTLSVerifyValues",
-                            "defaultValue": "true",
-                            "possibleValues": [
-                                {
-                                    "value": "true",
-                                    "displayValue": "True"
-                                },
-                                {
-                                    "value": "false",
-                                    "displayValue": "False"
-                                }
-                            ]
-                        }
-                    }
-                ]
+                }
             }
         }
     ]

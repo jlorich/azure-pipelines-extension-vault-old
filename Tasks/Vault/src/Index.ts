@@ -4,22 +4,23 @@ import { TaskResult } from "azure-pipelines-task-lib/task";
 import task = require('azure-pipelines-task-lib/task');
 
 import { VaultTask } from './VaultTask';
-import { VaultCommandRunner } from "./VaultCommandRunner";
+import { VaultClient } from "./VaultClient";
 import { Options } from './Options'
 
 import { TaskOptions } from './TaskOptions';
-import { VaultAuthenticationProvider } from './AuthenticationProvider/VaultAuthenticationProvider'
-import { TokenAuthenticationProvider } from './AuthenticationProvider/Token/TokenAuthenticationProvider'
-import { TokenAuthenticationOptions } from './AuthenticationProvider/TokenAuthenticationOptions'
-import { UserpassAuthenticationProvider } from './AuthenticationProvider/Userpass/UserpassAuthenticationProvider'
-import { UserpassAuthenticationOptions } from './AuthenticationProvider/Userpass/UserpassAuthenticationOptions'
-
+import { VaultAuthenticationProvider } from './AuthenticationProviders/VaultAuthenticationProvider'
+import { TokenAuthenticationProvider } from './AuthenticationProviders/Token/TokenAuthenticationProvider'
+import { TokenAuthenticationOptions } from './AuthenticationProviders/Token/TokenAuthenticationOptions'
+import { UserpassAuthenticationProvider } from './AuthenticationProviders/Userpass/UserpassAuthenticationProvider'
+import { UserpassAuthenticationOptions } from './AuthenticationProviders/Userpass/UserpassAuthenticationOptions'
+import { GitHubAuthenticationProvider } from './AuthenticationProviders/GitHub/GitHubAuthenticationProvider'
+import { GitHubAuthenticationOptions } from './AuthenticationProviders/GitHub/GitHubAuthenticationOptions'
 
 let container = new Container();
 
 // Bind Vault task classes for DI
 container.bind(VaultTask).toSelf()
-container.bind(VaultCommandRunner).toSelf();
+container.bind(VaultClient).toSelf();
 container.bind<TaskOptions>(TaskOptions).toDynamicValue((context) => {
     return Options.load(TaskOptions); 
 });
@@ -42,6 +43,13 @@ switch (options.authMethod) {
         });
 
         break;
+        case "endpoint-auth-scheme-github":
+            container.bind(VaultAuthenticationProvider).to(GitHubAuthenticationProvider);
+            container.bind<GitHubAuthenticationOptions>(GitHubAuthenticationOptions).toDynamicValue((context) => {
+                return Options.load(GitHubAuthenticationOptions); 
+            });
+    
+            break;
     default:
         break;
 }

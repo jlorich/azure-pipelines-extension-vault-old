@@ -47,7 +47,7 @@
             "label": "Key",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The Key to access",
+            "helpMarkDown": "The key path to access",
             "visibleRule": "command = gvGet || command = kvPut"
         },
         {

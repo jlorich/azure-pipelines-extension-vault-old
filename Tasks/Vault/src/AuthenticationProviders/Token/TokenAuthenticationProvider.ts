@@ -1,6 +1,8 @@
 import { injectable } from "inversify";
 import { VaultAuthenticationProvider } from "../VaultAuthenticationProvider";
 import { TokenAuthenticationOptions } from "./TokenAuthenticationOptions";
+import { RestClient } from 'typed-rest-client/RestClient'
+import { VaultAuthentication } from "../VaultAuthentication";
 
 /**
  * Token authentication provider for Vault
@@ -15,11 +17,7 @@ export class TokenAuthenticationProvider extends VaultAuthenticationProvider {
     /**
      * Loads the ARM connected service information into the environment
      */
-    public async authenticate() : Promise<{ [key: string]: string; }> {
-        return {
-            VAULT_SKIP_VERIFY: String(this.options.tlsVerify == "false"),
-            VAULT_ADDR: this.options.url,
-            VAULT_TOKEN: this.options.token
-        };
+    public async authenticate() : Promise<VaultAuthentication> {
+        return new VaultAuthentication(this.options.token);
     }
 }

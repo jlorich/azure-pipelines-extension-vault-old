@@ -1,38 +1,36 @@
 import path = require("path");
 import fs = require("fs");
 import os = require("os");
+import task = require('azure-pipelines-task-lib/task');
 
 import { injectable } from "inversify";
-import { VaultCommandRunner } from "./VaultCommandRunner";
+import { VaultClient } from "./VaultClient";
 import { TaskOptions } from './TaskOptions';
 
 @injectable()
 export class VaultTask {
 
     constructor(
-        private vault : VaultCommandRunner,
+        private vault : VaultClient,
         private options: TaskOptions)
     {
         
     }
 
     public async run() {
+        await this.vault.initialize();
+
         switch(this.options.command) {
             case 'kvGet':
-                await this.vault.exec(['kv', 'get', this.options.key]);
+                let kvGetResponse = await this.vault.keyValue.get(this.options.key);
+                this.setResultVariables(kvGetResponse.data.data);
+                
                 break;
+
             case 'kvPut':
-                await this.vault.exec(['kv', 'put', this.options.key, this.options.data]);
-                break;
-            case 'read':
-                await this.vault.exec(['read', this.options.path]);
-                break;
-            case 'write':
-                await this.vault.exec(['read', this.options.path, this.options.data]);
-                break;
-            case "CLI":
-                var path = this.initScriptAtPath();
-                await this.vault.cli(path);
+                let data = JSON.parse(this.options.data);
+                await this.vault.keyValue.put(this.options.key, data)
+                
                 break;
             default:
                 throw new Error("Invalid command");
@@ -40,64 +38,25 @@ export class VaultTask {
     }
 
     /**
-     * Loads the specified CLI script into a file and returns the path
+     * Sets all key/value pairs in data as environment variables
+     * 
+     * Note: all / values will be replaced with underscores
+     * 
+     * @param data The data to set
+     * @param prefix A prefix string to invlude on all environment variable names
      */
-    private initScriptAtPath(): string {
-        let scriptPath: string;
+    private setResultVariables(data: { [key: string]: string; }, prefix = "") {
+        // Strip trailing slash
+        prefix = prefix.replace(/\/+$/, "");
 
-        if (this.options.scriptLocation === "scriptPath") {
-            if (!this.options.scriptPath){
-                throw new Error("Script path not specified");
-            }
-
-            scriptPath = this.options.scriptPath;
-        }
-        else {
-            if (!this.options.script){
-                throw new Error("Script not specified");
-            }
-
-            var tmpDir = this.options.tempDir || os.tmpdir();
-
-            if (os.type() != "Windows_NT") {
-                scriptPath = path.join(tmpDir, "vaultclitaskscript" + new Date().getTime() + ".sh");
-            }
-            else {
-                scriptPath = path.join(tmpDir, "vaultclitaskscript" + new Date().getTime() + ".bat");
-            }
-            
-            this.createFile(scriptPath, this.options.script);
+        if (prefix != "") {
+            prefix = prefix + "_";
         }
 
-        return scriptPath;
-    }
-
-    /**
-     * Creates a file from a string at the given path
-     */
-    private createFile(filePath: string, data: string) {
-        try {
-            fs.writeFileSync(filePath, data);
-        }
-        catch (err) {
-            this.deleteFile(filePath);
-            throw err;
-        }
-    }
-
-    /**
-     * Deletes a file at the given path if it exists
-     */
-    private deleteFile(filePath: string): void {
-        if (fs.existsSync(filePath)) {
-            try {
-                //delete the publishsetting file created earlier
-                fs.unlinkSync(filePath);
-            }
-            catch (err) {
-                //error while deleting should not result in task failure
-                console.error(err.toString());
-            }
+        for(let key in data) {
+            let value = data[key];
+            let safekey = key.replace("/", "_");
+            task.setVariable(prefix + safekey, value, true);
         }
     }
 }
