@@ -8,7 +8,7 @@ jobs:
 
   steps:
   # Run the Vault installer.  It self-validates so no need to check beyond this
-  - task: vaulyInstaller@0
+  - task: vaultInstaller@0
     inputs:
       terraformVersion: '1.2.3'
     displayName: Install Vault
