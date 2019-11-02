@@ -1,6 +1,6 @@
 jobs:
 # Validates a valid template
-- job: Installer
+- job: TestInstaller
   displayName: Test Installer
   dependsOn:
   pool:
