@@ -21,8 +21,8 @@ export class UserpassAuthenticationProvider extends VaultAuthenticationProvider 
      */
     public async authenticate() : Promise<VaultAuthentication> {
         let request = new UserpassAuthenticationRequest(this.options.password);
-        let response = await this.client.create<UserpassAuthenticationResponse>(
-            "/auth/userpass/login/" + this.options.username,
+        let response = await this.client.http.create<UserpassAuthenticationResponse>(
+            "auth/userpass/login/" + this.options.username,
             request
         );
 

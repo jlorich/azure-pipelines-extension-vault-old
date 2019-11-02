@@ -22,7 +22,7 @@ export class GitHubAuthenticationProvider extends VaultAuthenticationProvider {
      */
     public async authenticate() : Promise<VaultAuthentication> {
         let request = new GitHubAuthenticationRequest(this.options.personalAccessToken);
-        let response = await this.client.create<GitHubAuthenticationResponse>('/auth/github/login', request);
+        let response = await this.client.http.create<GitHubAuthenticationResponse>('auth/github/login', request);
         
         if (response.statusCode >= 400 || !response.result) {
             throw new Error(`GitHub authentication error ${response.statusCode} - ${response.result}`)

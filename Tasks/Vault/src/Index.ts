@@ -5,6 +5,7 @@ import task = require('azure-pipelines-task-lib/task');
 
 import { VaultTask } from './VaultTask';
 import { VaultClient } from "./VaultClient";
+import { VaultAuthenticationClient } from "./VaultAuthenticationClient";
 import { Options } from './Options'
 
 import { TaskOptions } from './TaskOptions';
@@ -21,6 +22,7 @@ let container = new Container();
 // Bind Vault task classes for DI
 container.bind(VaultTask).toSelf()
 container.bind(VaultClient).toSelf();
+container.bind(VaultAuthenticationClient).toSelf();
 container.bind<TaskOptions>(TaskOptions).toDynamicValue((context) => {
     return Options.load(TaskOptions); 
 });
