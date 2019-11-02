@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { VaultAuthenticationProvider } from "./VaultAuthenticationProvider";
+import { VaultAuthenticationProvider } from "../VaultAuthenticationProvider";
 import { UserpassAuthenticationOptions } from "./UserpassAuthenticationOptions";
 
 /**

@@ -18,8 +18,21 @@ export class VaultTask {
 
     public async run() {
         switch(this.options.command) {
-            case 'login':
-                await this.vault.exec(['login']);
+            case 'kvGet':
+                await this.vault.exec(['kv', 'get', this.options.key]);
+                break;
+            case 'kvPut':
+                await this.vault.exec(['kv', 'put', this.options.key, this.options.data]);
+                break;
+            case 'read':
+                await this.vault.exec(['read', this.options.path]);
+                break;
+            case 'write':
+                await this.vault.exec(['read', this.options.path, this.options.data]);
+                break;
+            case "CLI":
+                var path = this.initScriptAtPath();
+                await this.vault.cli(path);
                 break;
             default:
                 throw new Error("Invalid command");

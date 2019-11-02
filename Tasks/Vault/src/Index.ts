@@ -9,10 +9,10 @@ import { Options } from './Options'
 
 import { TaskOptions } from './TaskOptions';
 import { VaultAuthenticationProvider } from './AuthenticationProvider/VaultAuthenticationProvider'
-import { TokenAuthenticationProvider } from './AuthenticationProvider/TokenAuthenticationProvider'
+import { TokenAuthenticationProvider } from './AuthenticationProvider/Token/TokenAuthenticationProvider'
 import { TokenAuthenticationOptions } from './AuthenticationProvider/TokenAuthenticationOptions'
-import { UserpassAuthenticationProvider } from './AuthenticationProvider/UserpassAuthenticationProvider'
-import { UserpassAuthenticationOptions } from './AuthenticationProvider/UserpassAuthenticationOptions'
+import { UserpassAuthenticationProvider } from './AuthenticationProvider/Userpass/UserpassAuthenticationProvider'
+import { UserpassAuthenticationOptions } from './AuthenticationProvider/Userpass/UserpassAuthenticationOptions'
 
 
 let container = new Container();

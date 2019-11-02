@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { endpointAuthorizationScheme, endpointAuthorizationParameter, endpointUrl } from "../Options";
+import { endpointAuthorizationScheme, endpointAuthorizationParameter, endpointUrl } from "../../Options";
 
 @injectable()
 export class UserpassAuthenticationOptions {

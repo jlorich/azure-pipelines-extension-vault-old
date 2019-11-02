@@ -38,9 +38,35 @@
                 "kvGet": "kv get",
                 "kvPut": "kv put",
                 "read": "read",
-                "write": "write",
-                "cli": "cli"
+                "write": "write"
             }
+        },
+        {
+            "name": "key",
+            "type": "string",
+            "label": "Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The Key to access",
+            "visibleRule": "command = gvGet || command = kvPut"
+        },
+        {
+            "name": "path",
+            "type": "string",
+            "label": "Path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The path to access",
+            "visibleRule": "command = read || command = write"
+        },
+        {
+            "name": "data",
+            "type": "string",
+            "label": "Data",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The data to set/write",
+            "visibleRule": "command = kvPut || command = write"
         }
     ],
     "dataSourceBindings": [

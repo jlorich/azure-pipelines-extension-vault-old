@@ -9,6 +9,12 @@ export class TaskOptions {
 
     // Basic
     readonly command : string = "";
+    readonly path : string = "";
+    readonly key : string = "";
+    readonly data : string = "";
+
+
+
     readonly cwd : string = "";
     readonly scriptLocation : string = "";
     readonly scriptPath : string = "";

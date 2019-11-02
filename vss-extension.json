@@ -86,9 +86,9 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-userpass",
-                        "displayName": "i18n:Userpass Authentication",
+                        "displayName": "i18n:Username Authentication",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
-                        "description": "i18n:Vault userpass endpoint authentication scheme",
+                        "description": "i18n:Vault username endpoint authentication scheme",
                         "inputDescriptors": [
                             {
                                 "id": "username",
