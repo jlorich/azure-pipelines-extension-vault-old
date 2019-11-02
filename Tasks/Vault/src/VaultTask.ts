@@ -23,7 +23,7 @@ export class VaultTask {
         switch(this.options.command) {
             case 'kvGet':
                 let kvGetResponse = await this.vault.keyValue.get(this.options.key);
-                this.setResultVariables(kvGetResponse.data.data);
+                this.setResultVariables(kvGetResponse.data.data, this.options.key);
                 
                 break;
 
@@ -48,6 +48,8 @@ export class VaultTask {
     private setResultVariables(data: { [key: string]: string; }, prefix = "") {
         // Strip trailing slash
         prefix = prefix.replace(/\/+$/, "");
+        prefix = prefix.split('/').join('_');
+        prefix = prefix.toUpperCase();
 
         if (prefix != "") {
             prefix = prefix + "_";
@@ -55,7 +57,7 @@ export class VaultTask {
 
         for(let key in data) {
             let value = data[key];
-            let safekey = key.replace("/", "_");
+            let safekey = key.toUpperCase();
             task.setVariable(prefix + safekey, value, true);
         }
     }

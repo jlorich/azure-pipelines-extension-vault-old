@@ -61,5 +61,5 @@ vaultTask.run().then(function()
 {
     task.setResult(TaskResult.Succeeded, "Vault successfully ran");
 }, function(reason) {
-    task.setResult(TaskResult.Failed, "Vault failed to run");
+    task.setResult(TaskResult.Failed, "Vault failed to run - " + reason);
 });

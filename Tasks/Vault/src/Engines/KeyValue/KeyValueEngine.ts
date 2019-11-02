@@ -13,8 +13,7 @@ export class KeyValueEngine {
     }
 
     public async get(path : string) : Promise<KeyValueGetResponse> {
-        let secretPath = url.resolve("/secret/data/", path);
-        let response = await this.client.get<KeyValueGetResponse>(secretPath);
+        let response = await this.client.get<KeyValueGetResponse>(path);
 
         if (response.statusCode >= 400 || !response.result) {
             throw new Error(`KeyValue Get Error ${response.statusCode} - ${response.result}`)
@@ -28,10 +27,8 @@ export class KeyValueEngine {
         data: { [key: string]: string; },
         cas : Number | undefined = undefined
     ) : Promise<KeyValuePutResponse> {
-        let secretPath = url.resolve("/secret/data/", path);
-
         let request = new KeyValuePutRequest(data, cas);
-        let response = await this.client.create<KeyValuePutResponse>(secretPath, request);
+        let response = await this.client.create<KeyValuePutResponse>(path, request);
 
         if (response.statusCode >= 400 || !response.result) {
             throw new Error(`KeyValue Put Error ${response.statusCode} - ${response.result}`)

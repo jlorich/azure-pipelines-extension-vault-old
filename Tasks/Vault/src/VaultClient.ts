@@ -1,11 +1,15 @@
+import { injectable } from 'inversify';
 import { RestClient } from 'typed-rest-client/RestClient'
 import { IRequestOptions } from 'typed-rest-client/Interfaces'
+
 import { TaskOptions } from './TaskOptions'
 import { VaultAuthenticationProvider } from './AuthenticationProviders/VaultAuthenticationProvider'
 import { VaultAuthentication } from './AuthenticationProviders/VaultAuthentication';
 import { KeyValueEngine } from './Engines/KeyValue/KeyValueEngine';
+
 const url = require('url');
 
+@injectable()
 export class VaultClient {
     private restClient! : RestClient;
     private _keyValue! : KeyValueEngine;
