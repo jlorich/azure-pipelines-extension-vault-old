@@ -48,7 +48,7 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "The key path to access",
-            "visibleRule": "command = gvGet || command = kvPut"
+            "visibleRule": "command = kvGet || command = kvPut"
         },
         {
             "name": "path",
@@ -67,6 +67,15 @@
             "required": true,
             "helpMarkDown": "The data to set/write",
             "visibleRule": "command = kvPut || command = write"
+        },
+        {
+            "name": "prefix",
+            "type": "string",
+            "label": "Prefix",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "A prefix to apply instead of the path for variable set by a read",
+            "visibleRule": "command = kvRead || command = read"
         }
     ],
     "dataSourceBindings": [

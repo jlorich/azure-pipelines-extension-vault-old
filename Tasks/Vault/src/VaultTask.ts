@@ -23,6 +23,7 @@ export class VaultTask {
         switch(this.options.command) {
             case 'kvGet':
                 let kvGetResponse = await this.vault.keyValue.get(this.options.key);
+                //todo: add prefix
                 this.setResultVariables(kvGetResponse.data.data, this.options.key);
                 
                 break;

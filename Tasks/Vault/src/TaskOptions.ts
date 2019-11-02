@@ -18,12 +18,7 @@ export class TaskOptions {
     readonly path : string = "";
     readonly key : string = "";
     readonly data : string = "";
-
-    readonly cwd : string = "";
-    readonly scriptLocation : string = "";
-    readonly scriptPath : string = "";
-    readonly script : string = "";
-
+    readonly prefix : string = "";
     
     @endpointUrl("vaultConnectedServiceName")
     public baseUrl : string = "";

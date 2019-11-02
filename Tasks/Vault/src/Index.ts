@@ -43,13 +43,13 @@ switch (options.authMethod) {
         });
 
         break;
-        case "endpoint-auth-scheme-github":
-            container.bind(VaultAuthenticationProvider).to(GitHubAuthenticationProvider);
-            container.bind<GitHubAuthenticationOptions>(GitHubAuthenticationOptions).toDynamicValue((context) => {
-                return Options.load(GitHubAuthenticationOptions); 
-            });
-    
-            break;
+    case "endpoint-auth-scheme-github":
+        container.bind(VaultAuthenticationProvider).to(GitHubAuthenticationProvider);
+        container.bind<GitHubAuthenticationOptions>(GitHubAuthenticationOptions).toDynamicValue((context) => {
+            return Options.load(GitHubAuthenticationOptions); 
+        });
+
+        break;
     default:
         break;
 }

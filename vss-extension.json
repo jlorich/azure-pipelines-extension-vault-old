@@ -66,7 +66,7 @@
                 "authenticationSchemes": [
                     {
                         "id": "endpoint-auth-scheme-token",
-                        "displayName": "i18n:Token Authentication",
+                        "displayName": "i18n:Vault Token",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
                         "description": "i18n:Token based endpoint authentication scheme",
                         "inputDescriptors": [
@@ -86,7 +86,7 @@
                     },
                     {
                         "id": "endpoint-auth-scheme-userpass",
-                        "displayName": "i18n:Username Authentication",
+                        "displayName": "i18n:Username/Password",
                         "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
                         "description": "i18n:Vault username endpoint authentication scheme",
                         "inputDescriptors": [
@@ -105,11 +105,31 @@
                                 "id": "password",
                                 "name": "i18n:Password",
                                 "description": "i18n:Vault Password",
-                                "inputMode": "textarea",
+                                "inputMode": "textbox",
                                 "isConfidential": true,
                                 "validation": {
                                     "isRequired": true,
                                     "dataType": "string"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "endpoint-auth-scheme-github",
+                        "displayName": "i18n:GitHub",
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-token",
+                        "description": "i18n:GitHub Personal Access Token based endpoint authentication scheme",
+                        "inputDescriptors": [
+                            {
+                                "id": "apitoken",
+                                "name": "i18n:Personal Access Token",
+                                "description": "i18n:Personal Access Token to use when authenticating with GitHub",
+                                "inputMode": "textbox",
+                                "isConfidential": true,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string",
+                                    "maxLength": 300
                                 }
                             }
                         ]
@@ -118,7 +138,7 @@
                 "url": {
                     "displayName": "i18n:Vault URL",
                     "required": true,
-                    "helpText": "i18n:Client connection endpoint for the Vault instance. Prefix the value with &quot;https://&quot;."
+                    "helpText": "i18n:Client connection endpoint for the Vault instance. Prefix the value with \"https://\"."
                 }
             }
         }
