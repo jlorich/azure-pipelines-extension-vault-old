@@ -20,13 +20,13 @@ export class TaskOptions {
     readonly data : string = "";
     readonly prefix : string = "";
     
-    @endpointUrl("vaultConnectedServiceName")
+    @endpointUrl("vaultServiceConnectionName")
     public baseUrl : string = "";
 
-    @endpointAuthorizationScheme("vaultConnectedServiceName")
+    @endpointAuthorizationScheme("vaultServiceConnectionName")
     public authMethod : string = "";
 
-    @endpointDataParameter("vaultConnectedServiceName", "vaultTLSVerify")
+    @endpointDataParameter("vaultServiceConnectionName", "vaultTLSVerify")
     public tlsVerify : string = ""; 
 
     @taskVariable("Agent.TempDirectory")

@@ -5,6 +5,6 @@ import {
 
 @injectable()
 export class TokenAuthenticationOptions {
-    @endpointAuthorizationParameter("vaultConnectedServiceName", "apitoken")
+    @endpointAuthorizationParameter("vaultServiceConnectionName", "apitoken")
     public token : string = ""; 
 }

@@ -5,9 +5,9 @@ import {
 
 @injectable()
 export class UserpassAuthenticationOptions {
-    @endpointAuthorizationParameter("vaultConnectedServiceName", "username")
+    @endpointAuthorizationParameter("vaultServiceConnectionName", "username")
     public username : string = ""; 
 
-    @endpointAuthorizationParameter("vaultConnectedServiceName", "password")
+    @endpointAuthorizationParameter("vaultServiceConnectionName", "password")
     public password : string = ""; 
 }
