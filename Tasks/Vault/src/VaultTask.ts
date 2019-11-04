@@ -6,6 +6,8 @@ import task = require('azure-pipelines-task-lib/task');
 import { injectable } from "inversify";
 import { VaultClient } from "./VaultClient";
 import { TaskOptions } from './TaskOptions';
+import { KeyValueReadResponse } from "./Engines/KeyValue/KeyValueReadResponse"
+import { KeyValueGetResponse } from "./Engines/KeyValue/KeyValueGetResponse"
 
 @injectable()
 export class VaultTask {
@@ -23,7 +25,7 @@ export class VaultTask {
 
         switch(this.options.command) {
             case 'kvGet':
-                let kvGetResponse = await this.vault.keyValue.get(this.options.key);
+                let kvGetResponse : KeyValueGetResponse = await this.vault.keyValue.get(this.options.key);
                 //todo: add prefix
                 this.setResultVariables(kvGetResponse.data.data, this.options.key);
                 break;
@@ -32,9 +34,9 @@ export class VaultTask {
                 await this.vault.keyValue.put(this.options.key, data)
                 break;
             case 'read':
-                let readResponse = await this.vault.keyValue.read(this.options.key);
+                let readResponse : KeyValueReadResponse = await this.vault.keyValue.read(this.options.key);
                 //todo: add prefix
-                this.setResultVariables(readResponse.data.data, this.options.key);
+                this.setResultVariables(readResponse.data, this.options.key);
                 break;
             case 'write':
                 data = JSON.parse(this.options.data);
